@@ -3,24 +3,28 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Provider } from 'react-redux';
-import { applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import Reducer from './_reducers';
+import userReducer from './_reducers/user_reducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(configureStore);
+const reducer = {
+  user: userReducer
+}
+const createStoreWithMiddleware = configureStore({
+  reducer,
+  middleware: [promiseMiddleware, ReduxThunk],
+  devTools: window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+});
+
 
 root.render(
   <React.StrictMode>
     <Provider
-      store={createStoreWithMiddleware(Reducer,
-          window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
-        )}
+      store={createStoreWithMiddleware}
     >
       <App />
     </Provider>
