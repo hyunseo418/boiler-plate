@@ -17,7 +17,7 @@ const reducer = {
 const createStoreWithMiddleware = configureStore({
   reducer,
   middleware: [promiseMiddleware, ReduxThunk],
-  devTools: window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  devTools: process.env.NODE_ENV !== 'production'
 });
 
 

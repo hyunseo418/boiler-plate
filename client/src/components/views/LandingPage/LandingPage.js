@@ -8,8 +8,11 @@ function LandingPage() {
   }, []);
 
   return ( 
-    <div>
-      LandingPage
+    <div style={{ 
+      display: 'flex', justifyContent: 'center', alignItems: 'center' 
+      , with: '100%', height: '100vh'
+    }}>
+      <h2>시작 페이지</h2>
     </div>
   );
 }
